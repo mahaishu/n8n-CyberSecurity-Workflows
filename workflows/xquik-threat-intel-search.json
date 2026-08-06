@@ -1,0 +1,165 @@
+{
+  "active": false,
+  "connections": {
+    "Normalize Tweets": {
+      "main": [
+        []
+      ]
+    },
+    "Search X Posts With Xquik": {
+      "main": [
+        [
+          {
+            "index": 0,
+            "node": "Normalize Tweets",
+            "type": "main"
+          }
+        ]
+      ]
+    },
+    "Set Search Terms": {
+      "main": [
+        [
+          {
+            "index": 0,
+            "node": "Search X Posts With Xquik",
+            "type": "main"
+          }
+        ]
+      ]
+    },
+    "When Executed Manually": {
+      "main": [
+        [
+          {
+            "index": 0,
+            "node": "Set Search Terms",
+            "type": "main"
+          }
+        ]
+      ]
+    }
+  },
+  "id": "xquik-threat-intel-search",
+  "meta": {
+    "templateCredsSetupCompleted": false
+  },
+  "name": "Xquik Threat Intel Search",
+  "nodes": [
+    {
+      "id": "b7bcf362-7a72-4a4a-ae21-9c5152698d66",
+      "name": "When Executed Manually",
+      "parameters": {},
+      "position": [
+        -820,
+        120
+      ],
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1
+    },
+    {
+      "id": "65b09832-71ed-4116-a0c1-23d679d2ad6d",
+      "name": "Set Search Terms",
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "7cf58752-4c5b-4f2c-b161-3d4d42171175",
+              "name": "query",
+              "type": "string",
+              "value": "\"phishing kit\" OR \"credential leak\""
+            },
+            {
+              "id": "14761989-a25a-4352-9b6d-005f837f4b5f",
+              "name": "limit",
+              "type": "number",
+              "value": 25
+            }
+          ]
+        },
+        "options": {}
+      },
+      "position": [
+        -600,
+        120
+      ],
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4
+    },
+    {
+      "id": "70877b5c-d0f3-4ba1-b9dd-7c6083ad5a70",
+      "name": "Search X Posts With Xquik",
+      "parameters": {
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "x-api-key",
+              "value": "={{ $env.XQUIK_API_KEY }}"
+            }
+          ]
+        },
+        "method": "GET",
+        "options": {},
+        "queryParameters": {
+          "parameters": [
+            {
+              "name": "q",
+              "value": "={{ $json.query }}"
+            },
+            {
+              "name": "limit",
+              "value": "={{ $json.limit }}"
+            }
+          ]
+        },
+        "sendHeaders": true,
+        "sendQuery": true,
+        "url": "https://xquik.com/api/v1/x/tweets/search"
+      },
+      "position": [
+        -360,
+        120
+      ],
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2
+    },
+    {
+      "id": "19b21e7b-149a-4db3-af36-344fa72aa8d1",
+      "name": "Normalize Tweets",
+      "parameters": {
+        "jsCode": "const body = $input.first().json;\nconst rows = body.data ?? body.tweets ?? body.items ?? body.results ?? [];\n\nif (!Array.isArray(rows) || rows.length === 0) {\n  return [{ json: { note: 'No tweet rows found', response: body } }];\n}\n\nreturn rows.map((tweet) => ({\n  json: {\n    tweet_id: tweet.id ?? tweet.tweet_id ?? tweet.tweetId ?? null,\n    text: tweet.text ?? tweet.full_text ?? tweet.content ?? '',\n    author_username: tweet.author?.username ?? tweet.user?.username ?? tweet.username ?? null,\n    created_at: tweet.created_at ?? tweet.createdAt ?? null,\n    url: tweet.url ?? tweet.permalink ?? null,\n  },\n}));"
+      },
+      "position": [
+        -120,
+        120
+      ],
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2
+    },
+    {
+      "id": "81b20a3f-d660-4fd3-a3ed-59ceded0f770",
+      "name": "Workflow Notes",
+      "parameters": {
+        "content": "Set XQUIK_API_KEY in the n8n environment before running. Update the query for actor names, domains, CVEs, malware families, or campaign keywords.",
+        "height": 220,
+        "width": 320
+      },
+      "position": [
+        -600,
+        -140
+      ],
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1
+    }
+  ],
+  "pinData": {},
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "tags": [
+    "threat-intelligence",
+    "osint",
+    "xquik"
+  ],
+  "versionId": "f4ab4319-8ae8-4b72-97ce-d4fa7f7f54cc"
+}
